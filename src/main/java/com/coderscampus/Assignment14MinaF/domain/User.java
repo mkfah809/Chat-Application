@@ -1,14 +1,17 @@
 package com.coderscampus.Assignment14MinaF.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,9 +21,10 @@ public class User {
 	private Long userId;
 	private String userName;
 	private List<Channel> channels;
-	private List<Message> messages;
+	private List<Message> messages = new ArrayList<Message>();
 
 	
+	@OneToMany(mappedBy = "user")
 	public List<Message> getMessages() {
 		return messages;
 	}
@@ -32,7 +36,7 @@ public class User {
 	public Long getUserId() {
 		return userId;
 	}
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_channels",
 	joinColumns = @JoinColumn(name = "user_id"),
 	inverseJoinColumns = @JoinColumn(name = "channel_id"))
@@ -56,9 +60,6 @@ public class User {
 		this.userName = userName;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", channels=" + channels + "]";
-	}
+	
 
 }
