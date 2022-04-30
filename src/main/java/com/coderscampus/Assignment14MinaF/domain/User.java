@@ -3,6 +3,7 @@ package com.coderscampus.Assignment14MinaF.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,23 +24,24 @@ public class User {
 	private List<Channel> channels;
 	private List<Message> messages = new ArrayList<Message>();
 
-	
 	@OneToMany(mappedBy = "user")
 	public List<Message> getMessages() {
 		return messages;
 	}
+
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getUserId() {
 		return userId;
 	}
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_channels",
-	joinColumns = @JoinColumn(name = "user_id"),
-	inverseJoinColumns = @JoinColumn(name = "channel_id"))
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@JoinTable(name = "user_channels", 
+	joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "channel_id"))
 	public List<Channel> getChannels() {
 		return channels;
 	}
@@ -59,7 +61,5 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	
 
 }
