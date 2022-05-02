@@ -2,6 +2,7 @@ package com.coderscampus.Assignment14MinaF.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
+
+	
 
 	private Long userId;
 	private String userName;
@@ -41,7 +44,8 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinTable(name = "user_channels", 
-	joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "channel_id"))
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "channel_id"))
 	public List<Channel> getChannels() {
 		return channels;
 	}
