@@ -1,11 +1,13 @@
 package com.coderscampus.Assignment14MinaF.web;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,23 +26,27 @@ public class UserController {
 @Autowired
 	UserRepository userRepo;
 	@GetMapping("/welcome")
-	public String getWelcome(ModelMap model, Channel channel, User user) {
-		if(channel.getChannelId() == null) {
-			System.out.println("Channel id is empty");
-			model.put("channel", new Channel());			
-		} else {
-			
-		}
+	public String getWelcome(ModelMap model) {
+		List<Channel> findAllChannels = channelService.findAllChannels();
+		
+		model.put("channels", findAllChannels);
+
 		return "welcome";
 	}
 
 	@PostMapping("/welcome")
 	public String postWelcome(@RequestBody User user) {
 		userService.createNewUser(user);
-	    User saveUser = userService.saveUser(user);
-	   Channel next = user.getChannels().iterator().next();
-		userService.findById(user.getUserId());
+		userService.saveUser(user);
 	    return "redirect:/welcome";
 	}
 
+
+	@GetMapping("/channels/{channelId}")
+	public String getChannel(ModelMap model, @PathVariable Long channelId) {
+		Channel findByChannelId = channelService.findById(channelId);
+		System.out.println("XXX " + findByChannelId);
+		model.put("channel", findByChannelId);
+		return "channel";
+	}
 }
