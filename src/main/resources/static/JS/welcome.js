@@ -1,11 +1,11 @@
 var userNamePrompt = window.prompt('What is your name?', 'Mina K Fahmy');
-var userIdTextbox = document.querySelector('#username')
+//var userIdTextbox = document.querySelector('#userId')
 
 var users = []
 if (userNamePrompt != null) {
 	var user = {
 		'userName': userNamePrompt,	
-		'userId' :  userIdTextbox
+//		'userId' :  userIdTextbox
  	}
 	sessionStorage.setItem('user', JSON.stringify(user));
 	users.push(user)

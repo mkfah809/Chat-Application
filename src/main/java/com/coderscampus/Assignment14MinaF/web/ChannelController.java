@@ -12,5 +12,11 @@ import com.coderscampus.Assignment14MinaF.service.ChannelService;
 @Controller
 public class ChannelController {
 
-	
+	@Autowired
+	ChannelService channelService;
+	@GetMapping("/channels/{channelId}") 
+	public String getChannel(@PathVariable Long channelId, ModelMap model) {
+		Channel channel = channelService.findByChannelId(channelId);
+		return "channel";
+	}
 }

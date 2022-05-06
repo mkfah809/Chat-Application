@@ -5,15 +5,14 @@
 
 </head>
 <body>
-	<script type="text/javascript" src="/js/welcome.js"></script>
 	<h2>Join A Channel</h2>
-	<div>
-		<input type="text" id="userId"/>
-	</div>
-	<div >
-		<a th:text="${channel.channelName}"></a>
-	</div>
 
+	<script type="text/javascript" src="/js/welcome.js"></script>
+	<div th:each="channel : ${channels}">
+		<a href="channel.html">[[${channel.channelName}]]</a>
+	</div>
+	
+	
 
 </body>
 </html>
