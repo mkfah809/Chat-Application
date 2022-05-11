@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.coderscampus.Assignment14MinaF.domain.Channel;
 import com.coderscampus.Assignment14MinaF.repository.ChannelRepository;
 
-@Service
+@Service	
 public class ChannelService {
 	@Autowired
 	ChannelRepository channelRepo;
@@ -19,9 +19,12 @@ public class ChannelService {
 	}
 	
 	public Channel findByChannelId(Long channelId) {
-		Optional<Channel> findById = channelRepo.findById(channelId);
-		System.out.println("The channelId I get is " + channelId);
-		return findById.orElse(null);
+		
+		if(findAllChannels().size() == 1) {
+			 Channel channel = findAllChannels().get(0);
+			 channelId = channel.getChannelId();					
+		}
+		return channelRepo.findById(channelId).orElse(null);
 	}
 
 }
