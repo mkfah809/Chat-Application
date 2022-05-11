@@ -54,7 +54,6 @@ public class UserService {
 		Optional<User> userOpt = userRepo.findById(userId);
 		System.out.println("The userId I get is " + userId);
 		return userOpt.orElse(null);
-
 	}
 
 }

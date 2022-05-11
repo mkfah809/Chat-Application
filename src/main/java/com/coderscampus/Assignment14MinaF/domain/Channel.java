@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,8 @@ public class Channel {
 	private List<Message> messages = new ArrayList<Message>();
 	private List<User> users = new ArrayList<User>();
 	
-	@ManyToMany(mappedBy = "channels")
+	@ManyToMany(mappedBy = "channels"
+			,fetch = FetchType.LAZY)
 	public List<User> getUsers() {
 		return users;
 	}
@@ -37,7 +39,8 @@ public class Channel {
 		return channelId;
 	}
 
-	@OneToMany(mappedBy = "channel")
+	@OneToMany(mappedBy = "channel"
+			  ,fetch = FetchType.LAZY)
 	public List<Message> getMessages() {
 		return messages;
 	}
