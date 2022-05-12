@@ -1,5 +1,7 @@
 package com.coderscampus.Assignment14MinaF.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,16 +26,22 @@ public class ChannelController {
 	UserService userService;
 	@Autowired
 	MessageService messageService;
+
 	@GetMapping("/channels/{channelId}")
-	public String getChannel(@PathVariable Long channelId, ModelMap model) {
+	public String getChannel(@PathVariable Long channelId, ModelMap model, Message message) {
 		model.put("channels", channelService.findByChannelId(channelId));
+	
 		return "channel";
 	}
-	
+
 	@PostMapping("/channels/{channelId}")
-	public String postMessage(@RequestBody Channel channel, Message message) {
+	public String postMessage(ModelMap model, @RequestBody Channel channel, Message message, Long messageId) {
 		messageService.save(message, channel);
-		return "redirect:/channels/{channelId}";
+		System.out.println("message Id is " + message.getMessageId());
+		if (message.getChannel() != null) {
+			model.put("message", message);
+			System.out.println("message content is => " + message.getMessageContent());
+		}
+		return "redirect:/channels/" + message.getChannel().getChannelId();
 	}
-	
 }

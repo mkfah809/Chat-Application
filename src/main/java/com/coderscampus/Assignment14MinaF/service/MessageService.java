@@ -2,6 +2,7 @@ package com.coderscampus.Assignment14MinaF.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,20 +25,32 @@ public class MessageService {
 	public Message save(Message message, Channel channel) {
 		channel = channelService.findByChannelId(channel.getChannelId());
 		if (message.getMessageId() == null) {
-			List<User> users = channel.getUsers();
-			ArrayList<Message> messages = new ArrayList<>();
-			
-			User user = users.get(users.size()-1);
-			user.setMessages(messages);
-			messages.add(message);
-			message.setUser(user);
-			message.setChannel(channel);
-			channel.setMessages(messages);
-			messages.add(message);
+			setMessagesToChannelAndUser(message, channel);
 			
 		}
-		System.out.println("message  is " + message.getMessageContent());
 
 		return messageRepo.save(message);
 	}
+
+	private void setMessagesToChannelAndUser(Message message, Channel channel) {
+		List<User> users = channel.getUsers();
+		List<Message> messages = new ArrayList<>();
+	
+		User user = users.get(users.size()-1);
+		user.setMessages(messages);
+		message.setUser(user);
+		message.setChannel(channel);
+		channel.setMessages(messages);
+		
+		messages.add(message);
+		messages.add(message);
+	}
+
+	public Message findByMessageId(Long messageId) {
+		Optional<Message> findById = messageRepo.findById(messageId);
+		System.out.println(findById);
+		return findById.orElse(null);
+	}
+
+	
 }

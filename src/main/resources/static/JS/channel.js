@@ -1,8 +1,9 @@
 var submitMessage = document.querySelector('#messageContent')
 
 var message = {
-	'messageContent' : document.getElementById('messageContent').value
+	'messageContent': document.getElementById('messageContent').value
 }
+
 submitMessage.addEventListener('keypress', (e) => {
 	if (e.key == 'Enter') {
 		fetch('http://localhost:8080/channels/{channelId}', {

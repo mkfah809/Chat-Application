@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Channel</title>
 </head>
 <body>
-	<div style="border:thin;"> 
-	test
-	</div>
 	<div>
-	<textarea id="messageContent" rows="10" cols="50"></textarea>
+		<textarea id="messageContent" rows="10" cols="50" th:field=${message.messageContent}></textarea>
 	</div>
-		<script type="text/javascript" src="/js/channel.js"></script>
-	
+	<script type="text/javascript" src="/js/channel.js"></script>
 </body>
 </html>
