@@ -1,8 +1,12 @@
 var submitMessage = document.querySelector('#messageContent')
 
 var message = {
-	'messageContent': document.getElementById('messageContent').value
+	'messageContent': submitMessage.value
 }
+
+str = JSON.stringify(message);
+console.log(str)
+
 
 submitMessage.addEventListener('keypress', (e) => {
 	if (e.key == 'Enter') {

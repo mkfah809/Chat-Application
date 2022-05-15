@@ -37,7 +37,7 @@ public class MessageService {
 		List<Message> messages = new ArrayList<>();
 	
 		User user = users.get(users.size()-1);
-		user.setMessages(messages);
+//		user.setMessages(messages);
 		message.setUser(user);
 		message.setChannel(channel);
 		channel.setMessages(messages);
@@ -48,8 +48,12 @@ public class MessageService {
 
 	public Message findByMessageId(Long messageId) {
 		Optional<Message> findById = messageRepo.findById(messageId);
-		System.out.println(findById);
 		return findById.orElse(null);
+	}
+
+	public List<Message> findAll() {
+	return messageRepo.findAll();
+		
 	}
 
 	

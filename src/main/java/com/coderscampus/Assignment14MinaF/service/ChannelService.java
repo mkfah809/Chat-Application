@@ -21,8 +21,7 @@ public class ChannelService {
 	public Channel findByChannelId(Long channelId) {
 		
 		if(findAllChannels().size() == 1) {
-			 Channel channel = findAllChannels().get(0);
-			 channelId = channel.getChannelId();					
+			 channelId = findAllChannels().get(0).getChannelId();	
 		}
 		return channelRepo.findById(channelId).orElse(null);
 	}

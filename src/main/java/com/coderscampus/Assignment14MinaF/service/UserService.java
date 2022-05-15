@@ -51,9 +51,7 @@ public class UserService {
 	}
 
 	public User findByUserId(Long userId) {
-		Optional<User> userOpt = userRepo.findById(userId);
-		System.out.println("The userId I get is " + userId);
-		return userOpt.orElse(null);
+		return userRepo.findById(userId).orElse(null);
 	}
 
 }
