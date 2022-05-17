@@ -31,15 +31,11 @@ public class ChannelController {
 		return "channel";
 	}
 
+	
 	@PostMapping("/channels/{channelId}")
-
-	public String postMessage(ModelMap model,@RequestBody  Channel channel,@RequestBody  Message message) {
-		messageService.save(message, channel);
-
-		Message findByMessageId = messageService.findByMessageId(message.getMessageId());
-		if (message.getChannel() != null) {
-			// model.put("message", findByMessageId.getMessageContent());
-		}
+	public String postMessage(@RequestBody Message message, Long channelId, ModelMap model) {
+		messageService.save(message, channelId);
+		model.put("message", message.getMessageContent());
 		return "redirect:/channels/" + message.getChannel().getChannelId();
 	}
 }

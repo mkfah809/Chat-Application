@@ -1,9 +1,13 @@
 var userNamePrompt = window.prompt('What is your name?', 'Mina K Fahmy');
 
+
+
+
 var user = {
 	'userName': userNamePrompt
 }
 
+console.log(user)
 
 sessionStorage.setItem('user', JSON.stringify(user));
 

@@ -22,9 +22,12 @@ public class MessageService {
 	@Autowired
 	UserService userService;
 
-	public Message save(Message message, Channel channel) {
-		channel = channelService.findByChannelId(channel.getChannelId());
+	public Message save(Message message, Long channelId) {
+	
+		
+		
 		if (message.getMessageId() == null) {
+			Channel channel = channelService.findByChannelId(channelId);
 			setMessagesToChannelAndUser(message, channel);
 			
 		}
@@ -34,27 +37,18 @@ public class MessageService {
 
 	private void setMessagesToChannelAndUser(Message message, Channel channel) {
 		List<User> users = channel.getUsers();
+	
 		List<Message> messages = new ArrayList<>();
 	
 		User user = users.get(users.size()-1);
-//		user.setMessages(messages);
 		message.setUser(user);
 		message.setChannel(channel);
 		channel.setMessages(messages);
 		
 		messages.add(message);
-		messages.add(message);
+		users.add(user);
 	}
 
-	public Message findByMessageId(Long messageId) {
-		Optional<Message> findById = messageRepo.findById(messageId);
-		return findById.orElse(null);
-	}
-
-	public List<Message> findAll() {
-	return messageRepo.findAll();
-		
-	}
 
 	
 }
