@@ -1,15 +1,18 @@
 var submitMessage = document.querySelector('#messageContent')
 
-var message = {
-	'messageContent': submitMessage.value
-}
-
-str = JSON.stringify(message);
-console.log(str)
 
 
 submitMessage.addEventListener('keypress', (e) => {
-	if (e.key == 'Enter') {
+
+		var message = {
+			'messageContent': submitMessage.value
+		}
+		
+		
+		str = JSON.stringify(message);
+		console.log(str)
+
+	if (e.key === 'Enter') {
 		fetch('http://localhost:8080/channels/{channelId}', {
 			method: 'POST',
 			headers: {
@@ -17,5 +20,8 @@ submitMessage.addEventListener('keypress', (e) => {
 			},
 			body: JSON.stringify(message)
 		}).then((response) => response.json())
+
+	} else {
+		console.log("didn't press enter'")
 	}
 })
