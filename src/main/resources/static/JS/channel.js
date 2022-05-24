@@ -1,16 +1,14 @@
 var submitMessage = document.querySelector('#messageContent')
 
-var userName = sessionStorage.getItem('user')
-
-console.log(userName)
-
 submitMessage.addEventListener('keypress', (e) => {
-	
-	var message = {
-		'messageContent': submitMessage
-	}
 
 	if (e.key === 'Enter') {
+		var message = {
+			'messageContent': submitMessage.value,
+//			'user': sessionStorage.getItem('user')
+		}
+
+		console.log(message)
 		fetch('http://localhost:8080/channels/{channelId}', {
 			method: 'POST',
 			headers: {
@@ -18,12 +16,10 @@ submitMessage.addEventListener('keypress', (e) => {
 			},
 			body: JSON.stringify(message)
 		}).then((response) => response.json())
+		setTimeout("location.reload();", 90)
 
 	} else {
 		console.log("didn't press enter'")
 	}
-	
-
-
-	
+	submitMessage.focus()
 })

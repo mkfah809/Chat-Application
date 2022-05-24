@@ -27,7 +27,7 @@ public class User {
 	private List<Channel> channels;
 	private List<Message> messages = new ArrayList<Message>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	public List<Message> getMessages() {
 		return messages;
 	}

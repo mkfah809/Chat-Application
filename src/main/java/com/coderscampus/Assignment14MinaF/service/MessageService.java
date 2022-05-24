@@ -23,32 +23,32 @@ public class MessageService {
 	UserService userService;
 
 	public Message save(Message message, Long channelId) {
-	
-		
-		
-		if (message.getMessageId() == null) {
-			Channel channel = channelService.findByChannelId(channelId);
-			setMessagesToChannelAndUser(message, channel);
-			
-		}
-
+		setMessagesToChannelAndUser(message, channelService.findByChannelId(channelId),new ArrayList<>());
 		return messageRepo.save(message);
 	}
 
-	private void setMessagesToChannelAndUser(Message message, Channel channel) {
-		List<User> users = channel.getUsers();
-	
-		List<Message> messages = new ArrayList<>();
-	
+
+
+	private void setMessagesToChannelAndUser(Message message, Channel channel, List<Message> messages) {
+		List<User> users = channel.getUsers();		
 		User user = users.get(users.size()-1);
-		message.setUser(user);
+		System.out.println(user.getUserName()+" XXX "+ user.getUserId());
 		message.setChannel(channel);
 		channel.setMessages(messages);
 		
+		user.setMessages(messages);
+		message.setUser(user);
+		
 		messages.add(message);
 		users.add(user);
+		
 	}
 
+	public List<Message> findAllMessages() {
+		return messageRepo.findAll();
+	}
 
-	
+	public Message findByChannelId(Long MessageId) {
+		return messageRepo.findById(MessageId).orElse(null);
+	}
 }

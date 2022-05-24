@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.Nullable;
+
 @Entity
 @Table(name = "messages")
 public class Message {
@@ -49,7 +51,7 @@ public class Message {
 	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
 	}
-
+	 
 	public String getMessageContent() {
 		return messageContent;
 	}

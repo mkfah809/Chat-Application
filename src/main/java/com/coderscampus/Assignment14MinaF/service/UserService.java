@@ -22,20 +22,12 @@ public class UserService {
 	ChannelService channelService;
 
 	public User saveUser(User user) {
-
-		if (user.getUserId() == null) {
-			setUserToExistingChannel(user, new Channel(), new ArrayList<>(), new ArrayList<>());
-
-		} else {
-
-			System.out.println("UserExists");
-
-		}
+		setUserToExistingChannel(user, new Channel(), new ArrayList<>());
 		return userRepo.save(user);
 	}
 
-	private void setUserToExistingChannel(User user, Channel channel, List<User> users, List<Channel> channels) {
-		channels = channelService.findAllChannels();
+	private void setUserToExistingChannel(User user, Channel channel, List<User> users) {
+		List<Channel> channels = channelService.findAllChannels();
 		if (channels.isEmpty()) {
 			channel.setChannelName("general");
 			channels.add(channel);
