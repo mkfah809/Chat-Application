@@ -33,17 +33,21 @@ public class UserService {
 			channels.add(channel);
 			channelRepo.save(channel);
 		}
-		connectParentToChild(user, channel, users, channels);
-	}
-
-	private void connectParentToChild(User user, Channel channel, List<User> users, List<Channel> channels) {
+		
 		users.add(user);
 		channel.setUsers(users);
 		user.setChannels(channels);
 	}
 
 	public User findByUserId(Long userId) {
+		
+		System.out.println("findByUserId: " + userId);
 		return userRepo.findById(userId).orElse(null);
+	}
+
+	public List<User> findAll() {
+		return userRepo.findAll();
+		
 	}
 
 }

@@ -19,11 +19,15 @@ public class ChannelService {
 	}
 	
 	public Channel findByChannelId(Long channelId) {
-		
 		if(findAllChannels().size() == 1) {
 			 channelId = findAllChannels().get(0).getChannelId();	
 		}
 		return channelRepo.findById(channelId).orElse(null);
+	}
+	
+	public Channel saveChannel(Channel channel) {
+		channel.setChannelName("general");
+		return channelRepo.save(channel);
 	}
 
 }

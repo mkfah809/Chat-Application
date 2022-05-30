@@ -34,8 +34,10 @@ public class ChannelController {
  
 	
 	@PostMapping("/channels/{channelId}")
-	public String postMessage(@RequestBody Message message, Long channelId, Long MessageId) {
-		messageService.save(message, channelId);
+	public String postMessage(@RequestBody Message message, Long channelId, User user) {
+		
+	
+		messageService.save(message, channelId, user);
 		System.out.println(message.getUser().getUserName());
 		System.out.println(message.getMessageContent());
 

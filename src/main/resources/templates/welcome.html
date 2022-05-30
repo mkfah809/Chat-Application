@@ -8,9 +8,19 @@
 	<h2>Join A Channel</h2>
 
 	<div th:each="channel : ${channels}">
-		<a th:href="@{/channels/{channelId}(channelId = ${channel.channelId})}">[[${channel.channelName}]]</a>
+		<a
+			th:href="@{/channels/{channelId}(channelId = ${channel.channelId})}">[[${channel.channelName}]]</a>
+		<br>
+<!-- 		<div> -->
+<!-- 			User Id: <input type="text" th:field="${user.userId}" /> -->
 
+<!-- 		</div> -->
 	</div>
+
+<!-- 		<div> -->
+<!-- 			User Id: <input type="text" th:field="${user.userId}" /> -->
+<!-- 		</div> -->
+
 
 	<script type="text/javascript" src="/js/welcome.js"></script>
 </body>
