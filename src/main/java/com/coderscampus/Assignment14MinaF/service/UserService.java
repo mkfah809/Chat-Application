@@ -2,7 +2,6 @@ package com.coderscampus.Assignment14MinaF.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,9 @@ public class UserService {
 	ChannelService channelService;
 
 	public User saveUser(User user) {
-		setUserToExistingChannel(user, new Channel(), new ArrayList<>());
+		setUserToExistingChannel(user, new Channel(), new ArrayList<User>());
 		return userRepo.save(user);
+
 	}
 
 	private void setUserToExistingChannel(User user, Channel channel, List<User> users) {
@@ -33,21 +33,17 @@ public class UserService {
 			channels.add(channel);
 			channelRepo.save(channel);
 		}
-		
 		users.add(user);
 		channel.setUsers(users);
 		user.setChannels(channels);
 	}
 
 	public User findByUserId(Long userId) {
-		
-		System.out.println("findByUserId: " + userId);
 		return userRepo.findById(userId).orElse(null);
 	}
 
 	public List<User> findAll() {
 		return userRepo.findAll();
-		
 	}
 
 }

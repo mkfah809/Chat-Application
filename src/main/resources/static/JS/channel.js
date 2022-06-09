@@ -14,9 +14,9 @@ async function postMessage() {
 
 			console.log(message)
 			fetch('http://localhost:8080/channels/{channelId}', {
-						method: 'POST',
+				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					  'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(message)
 			}).then((response) => response.json())

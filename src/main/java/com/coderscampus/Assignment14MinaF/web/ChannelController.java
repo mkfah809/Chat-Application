@@ -1,5 +1,7 @@
 package com.coderscampus.Assignment14MinaF.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.coderscampus.Assignment14MinaF.domain.Channel;
 import com.coderscampus.Assignment14MinaF.domain.Message;
-import com.coderscampus.Assignment14MinaF.domain.User;
 import com.coderscampus.Assignment14MinaF.service.ChannelService;
 import com.coderscampus.Assignment14MinaF.service.MessageService;
 import com.coderscampus.Assignment14MinaF.service.UserService;
@@ -34,13 +36,10 @@ public class ChannelController {
  
 	
 	@PostMapping("/channels/{channelId}")
-	public String postMessage(@RequestBody Message message, Long channelId, User user) {
-		
+	public String postMessage(@RequestBody Message message) {
 	
-		messageService.save(message, channelId, user);
-		System.out.println(message.getUser().getUserName());
-		System.out.println(message.getMessageContent());
-
+		messageService.saveMessage(message);
+		
 		return "redirect:/channels/" + message.getChannel().getChannelId();
 	}
 }
