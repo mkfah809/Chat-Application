@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.coderscampus.Assignment14MinaF.domain.Channel;
 import com.coderscampus.Assignment14MinaF.domain.Message;
+import com.coderscampus.Assignment14MinaF.domain.User;
 import com.coderscampus.Assignment14MinaF.repository.MessageRepository;
 
 @Service
@@ -21,26 +22,33 @@ public class MessageService {
 	UserService userService;
 
 	public Message saveMessage(Message message) {
-
-		setMessagesToChannelAndUser(message, message.getChannel(), new ArrayList<>());
+		Long channelId = null, userId = null;
+		Channel channel = channelService.findByChannelId(channelId);
+		List<Message> messages = new ArrayList<Message>();
+		List<Channel> channels = new ArrayList<Channel>();
+		List<User> users = new ArrayList<User>();
+		
+		message.setChannel(channel);
+		channel.setMessages(messages);
+		messages.add(message);
+		channels.add(channel);
+		
+		User user = userService.findByUserId(message.getUser().getUserId());
+		message.setUser(user);
+		user.setMessages(messages);
+		messages.add(message);
+		
+		
 		return messageRepo.save(message);
 	}
 
-	private void setMessagesToChannelAndUser(Message message, Channel channel, List<Message> messages) {
 
-		message.setChannel(channel);
-		messages.add(message);
-		channel.setMessages(messages);
-//		message.setUser();
-//		saveUser.setMessages(messages);
-		messages.add(message);
-	}
 
 	public List<Message> findAllMessages() {
 		return messageRepo.findAll();
 	}
 
-	public Message findByChannelId(Long MessageId) {
+	public Message findByMessageId(Long MessageId) {
 		return messageRepo.findById(MessageId).orElse(null);
 	}
 }

@@ -7,15 +7,14 @@
 <body>
 	<div style="border: thin solid black">
 		<div th:each="message : ${messages}">
-			<div >
-				<strong><span th:text="${message.user.userName}"></span>: </strong><span
-					th:text="${message.messageContent}"></span>
+			<div>
+				<strong><span th:text="${message.user.userName}"></span>: </strong> 
+				<span th:text="${message.messageContent}"></span>
 			</div>
 		</div>
 	</div>
 
 	<textarea id="messageContent" rows="10" cols="50"></textarea>
-
 
 	<script type="text/javascript" src="/js/channel.js"></script>
 

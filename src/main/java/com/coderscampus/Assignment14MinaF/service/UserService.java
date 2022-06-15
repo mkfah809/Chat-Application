@@ -21,18 +21,19 @@ public class UserService {
 	ChannelService channelService;
 
 	public User saveUser(User user) {
-		setUserToExistingChannel(user, new Channel(), new ArrayList<User>());
+
+		setChannelToUser(user, channelService.findAllChannels(), new Channel());
 		return userRepo.save(user);
 
 	}
 
-	private void setUserToExistingChannel(User user, Channel channel, List<User> users) {
-		List<Channel> channels = channelService.findAllChannels();
+	private void setChannelToUser(User user, List<Channel> channels, Channel channel) {
 		if (channels.isEmpty()) {
 			channel.setChannelName("general");
 			channels.add(channel);
 			channelRepo.save(channel);
 		}
+		ArrayList<User> users = new ArrayList<>();
 		users.add(user);
 		channel.setUsers(users);
 		user.setChannels(channels);
@@ -46,4 +47,8 @@ public class UserService {
 		return userRepo.findAll();
 	}
 
+	public void deleteByUserId(User user) {
+		userRepo.delete(user);
+		
+	}
 }

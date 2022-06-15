@@ -8,8 +8,7 @@
 	<h2>Join A Channel</h2>
 
 	<div>
-		<a
-			th:href="@{/channels/{channelId}(channelId = ${channel.channelId})}">[[${channel.channelName}]]</a>
+		<a th:href="@{/channels/{channelId}/{userId}(channelId = ${channel.channelId} , userId = ${user.userId})}">[[${channel.channelName}]]</a>
 		<br>
 	</div>
 

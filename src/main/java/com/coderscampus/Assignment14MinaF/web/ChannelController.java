@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.coderscampus.Assignment14MinaF.domain.Channel;
 import com.coderscampus.Assignment14MinaF.domain.Message;
+import com.coderscampus.Assignment14MinaF.domain.User;
 import com.coderscampus.Assignment14MinaF.service.ChannelService;
 import com.coderscampus.Assignment14MinaF.service.MessageService;
 import com.coderscampus.Assignment14MinaF.service.UserService;
@@ -26,20 +27,20 @@ public class ChannelController {
 	@Autowired
 	MessageService messageService;
 
-	@GetMapping("/channels/{channelId}")
-	public String getChannel(@PathVariable Long channelId, ModelMap model) {
-		model.put("channels", channelService.findByChannelId(channelId));
-		model.put("messages",messageService.findAllMessages());
-		
+	@GetMapping("/channels/{channelId}/{userId}")
+	public String getChannel(@PathVariable Long channelId, @PathVariable Long userId, ModelMap model, Message message) {
+		Channel findByChannelId = channelService.findByChannelId(channelId);
+		model.put("channel", findByChannelId.getChannelId());
+		User user = userService.findByUserId(userId);
+		List<Message> findAllMessages = messageService.findAllMessages();
+		model.put("messages", findAllMessages);
 		return "channel";
-	} 
- 
-	
-	@PostMapping("/channels/{channelId}")
+	}
+
+	@PostMapping("/channels/{channelId}/{userId}")
 	public String postMessage(@RequestBody Message message) {
-	
 		messageService.saveMessage(message);
-		
+
 		return "redirect:/channels/" + message.getChannel().getChannelId();
 	}
 }
