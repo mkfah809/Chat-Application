@@ -29,18 +29,14 @@ public class ChannelController {
 
 	@GetMapping("/channels/{channelId}/{userId}")
 	public String getChannel(@PathVariable Long channelId, @PathVariable Long userId, ModelMap model, Message message) {
-		Channel findByChannelId = channelService.findByChannelId(channelId);
-		model.put("channel", findByChannelId.getChannelId());
-		User user = userService.findByUserId(userId);
-		List<Message> findAllMessages = messageService.findAllMessages();
-		model.put("messages", findAllMessages);
+		model.put("channel", channelService.findByChannelId(channelId).getChannelId());
+		model.put("messages", messageService.findAllMessages());
 		return "channel";
 	}
 
 	@PostMapping("/channels/{channelId}/{userId}")
 	public String postMessage(@RequestBody Message message) {
 		messageService.saveMessage(message);
-
 		return "redirect:/channels/" + message.getChannel().getChannelId();
 	}
 }

@@ -33,9 +33,8 @@ public class UserService {
 			channels.add(channel);
 			channelRepo.save(channel);
 		}
-		ArrayList<User> users = new ArrayList<>();
-		users.add(user);
-		channel.setUsers(users);
+		new ArrayList<User>().add(user);
+		channel.setUsers(new ArrayList<User>());
 		user.setChannels(channels);
 	}
 
