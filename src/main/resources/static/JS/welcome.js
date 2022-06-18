@@ -15,5 +15,3 @@
 	}).then((response) => response.json())
 
 	sessionStorage.setItem('user', user.userId)
-
-

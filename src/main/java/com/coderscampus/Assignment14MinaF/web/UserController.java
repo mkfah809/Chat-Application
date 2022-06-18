@@ -26,10 +26,9 @@ public class UserController {
 	@GetMapping("/welcome")
 	public String getWelcome(ModelMap model, User user) {
 
-		userService.saveUser(user);
-
-		model.put("user",
-				userService.findByUserId(userService.findAll().get(userService.findAll().size() - 2).getUserId()));
+		User saveUser = userService.saveUser(user);
+		User findByUserId = userService.findByUserId(saveUser.getUserId());
+		model.put("user", findByUserId);	
 		model.put("channel", user.getChannels().get(0));
 		return "welcome";
 	}
@@ -37,7 +36,8 @@ public class UserController {
 	@PostMapping("/welcome")
 	public String postWelcome(@RequestBody User user) {
 		userService.saveUser(user);
-		return "redirect:/welcome";
+		
+		return "redirect://welcome";
 	}
 
 }
