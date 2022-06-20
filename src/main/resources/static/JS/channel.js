@@ -17,6 +17,10 @@ submitMessage.addEventListener('keypress', (e) => {
 			}
 
 		}
+		if (message.messageContent === '') {
+			console.log("XXXXX", "message content is empty")
+			alert('please type something')
+		}
 
 		console.log(message)
 		fetch('http://localhost:8080/channels/{channelId}/{userId}', {
@@ -31,7 +35,6 @@ submitMessage.addEventListener('keypress', (e) => {
 	}
 
 })
-
 setTimeout("window.location.reload();", 1000)
 
 
