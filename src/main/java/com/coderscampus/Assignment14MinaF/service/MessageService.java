@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.coderscampus.Assignment14MinaF.domain.Channel;
 import com.coderscampus.Assignment14MinaF.domain.Message;
-import com.coderscampus.Assignment14MinaF.domain.User;
+
 import com.coderscampus.Assignment14MinaF.repository.MessageRepository;
 
 @Service

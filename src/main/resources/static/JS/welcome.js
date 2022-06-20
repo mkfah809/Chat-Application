@@ -1,3 +1,6 @@
+if (sessionStorage.length === 1) {
+	console.log("there is a user exist already")
+} else {
 	var userName = prompt('To make your time on this website better', 'please enter your name.');
 	var userId = document.querySelector("#userId");
 	var user = {
@@ -14,4 +17,8 @@
 		body: JSON.stringify(user)
 	}).then((response) => response.json())
 
-	sessionStorage.setItem('user', user.userId)
+sessionStorage.setItem('user', user.userId)
+
+console.log(sessionStorage.length)
+
+}

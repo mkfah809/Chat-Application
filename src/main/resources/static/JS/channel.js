@@ -2,10 +2,7 @@
 var submitMessage = document.querySelector('#messageContent')
 var userId = parseInt(sessionStorage.getItem('user'), 10)
 
-//window.addEventListener('load', () => {
-//	setTimeout("window.location.reload();", 100)
-//
-//})
+
 var user
 
 
@@ -35,9 +32,7 @@ submitMessage.addEventListener('keypress', (e) => {
 
 })
 
-setTimeout("window.location.reload();", 100)
-function AutoRefresh(t) {
-	setTimeout("location.reload(true);", t);
-}
+setTimeout("window.location.reload();", 1000)
+
 
 submitMessage.focus()
