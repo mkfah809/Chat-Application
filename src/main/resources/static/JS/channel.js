@@ -1,16 +1,10 @@
 
 var submitMessage = document.querySelector('#messageContent')
 var userId = parseInt(sessionStorage.getItem('user'), 10)
-//const myTimeout = setTimeout(timedRefresh, 3000);
-//console.log('xadasdasd',myTimeout)
 
 var user
 
 const myTimeout = setTimeout("location.reload(true);", 5000);
-
-function autoRefreshing() {
-	myTimeout
-}
 
 function stopRefreshing() {
 	clearTimeout(myTimeout);
@@ -27,8 +21,7 @@ submitMessage.addEventListener('keypress', (e) => {
 
 		}
 		if (message.messageContent === '') {
-			console.log('message content is empty')
-			alert('please type something')
+			alert('message content is empty')
 		} else {
 			fetch('http://localhost:8080/channels/{channelId}/{userId}', {
 				method: 'POST',
@@ -39,18 +32,12 @@ submitMessage.addEventListener('keypress', (e) => {
 			}).then((response) => response.json())
 
 		}
-
-		console.log(message)
-
 	} else {
 		stopRefreshing()
 
 	}
 
 })
-//function timedRefresh(timeoutPeriod) {
-//	setTimeout("location.reload(true);", timeoutPeriod);
-//}
 if (submitMessage.value = '') {
 	setTimeout("location.reload(true);", 800);
 }

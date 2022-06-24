@@ -1,5 +1,5 @@
 if (sessionStorage.length === 1) {
-	console.log("there is a user exist already")
+	alert("there is a user exist already")
 } else {
 	var userName = prompt('To make your time on this website better', 'please enter your name.');
 	var userId = document.querySelector("#userId");
@@ -7,8 +7,7 @@ if (sessionStorage.length === 1) {
 		'userId': userId.value,
 		'userName': userName
 	}
-	console.log('userId is ', userId.value)
-	console.log('userName is ', userName)
+	
 	fetch('http://localhost:8080/welcome', {
 		method: 'POST',
 		headers: {
@@ -18,7 +17,4 @@ if (sessionStorage.length === 1) {
 	}).then((response) => response.json())
 
 sessionStorage.setItem('user', user.userId)
-
-console.log(sessionStorage.length)
-
 }
