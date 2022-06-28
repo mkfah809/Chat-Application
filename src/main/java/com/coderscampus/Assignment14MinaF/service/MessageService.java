@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.coderscampus.Assignment14MinaF.domain.Channel;
 import com.coderscampus.Assignment14MinaF.domain.Message;
-
+import com.coderscampus.Assignment14MinaF.domain.User;
 import com.coderscampus.Assignment14MinaF.repository.MessageRepository;
 
 @Service
@@ -23,14 +23,14 @@ public class MessageService {
 
 	public Message saveMessage(Message message) {
 		Long channelId = null;
-		Channel channel = channelService.findByChannelId(channelId);
-		message.setChannel(channel);
-		channel.setMessages(new ArrayList<Message>());
-		new ArrayList<Message>().add(message);
-		new ArrayList<Channel>().add(channel);
+
+		message.setChannel(channelService.findByChannelId(channelId));
+		channelService.findByChannelId(channelId).setMessages(channelService.findByChannelId(channelId).getMessages());
+
+		channelService.findAllChannels().add(channelService.findByChannelId(channelId));
+		channelService.findByChannelId(channelId).getMessages().add(message);
+
 		message.setUser(userService.findByUserId(message.getUser().getUserId()));
-		userService.findByUserId(message.getUser().getUserId()).setMessages(new ArrayList<Message>());
-		new ArrayList<Message>().add(message);
 
 		return messageRepo.save(message);
 	}

@@ -1,10 +1,10 @@
 
 var submitMessage = document.querySelector('#messageContent')
-var userId = parseInt(sessionStorage.getItem('user'), 10)
+
 
 var user
 
-const myTimeout = setTimeout("location.reload(true);", 5000);
+const myTimeout = setTimeout("location.reload(true);", 500);
 
 function stopRefreshing() {
 	clearTimeout(myTimeout);
@@ -16,7 +16,7 @@ submitMessage.addEventListener('keypress', (e) => {
 		var message = {
 			'messageContent': submitMessage.value,
 			user: {
-				'userId': userId
+				'userId': parseInt(sessionStorage.getItem('user'), 10)
 			}
 
 		}
