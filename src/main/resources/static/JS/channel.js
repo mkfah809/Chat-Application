@@ -4,7 +4,7 @@ var submitMessage = document.querySelector('#messageContent')
 
 var user
 
-const myTimeout = setTimeout("location.reload(true);", 500);
+const myTimeout = setTimeout("location.reload(true);", 1000);
 
 function stopRefreshing() {
 	clearTimeout(myTimeout);
@@ -12,13 +12,12 @@ function stopRefreshing() {
 
 submitMessage.addEventListener('keypress', (e) => {
 	if (e.key === 'Enter') {
-		setTimeout("location.reload(true);", 800);
+		setTimeout("location.reload(true);", 1000);
 		var message = {
 			'messageContent': submitMessage.value,
 			user: {
 				'userId': parseInt(sessionStorage.getItem('user'), 10)
 			}
-
 		}
 		if (message.messageContent === '') {
 			alert('message content is empty')
