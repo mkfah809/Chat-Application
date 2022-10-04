@@ -1,1 +1,3 @@
 save messages from client-side to the database using FetchAPI, thymeleaf, MVC, ORM, Java 
+build an interacting chat application that allows multiple users to talk with each other via chat text messages. This will be just like a simple version of Slack.
+To get started, visit start.spring.io and create a Java 11 Spring Boot application with Spring Web + Thymeleaf dependencies.
